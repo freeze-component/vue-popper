@@ -1,0 +1,25 @@
+{
+  "name": "vue-popper",
+  "version": "0.0.0",
+  "description": "A popper mixin for Vue.",
+  "main": "lib/index.js",
+  "scripts": {
+    "dev": "cooking watch -c cooking.demo.js",
+    "dist": "cooking build -p",
+    "deploy": "cooking build -c cooking.demo.js -p && gh-pages -d example/dist"
+  },
+  "homepage": "https://element-component.github.io/vue-popper/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/element-component/vue-popper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/element-component/vue-popper/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vue": "*",
+    "gh-pages": "^0.11.0",
+    "popper.js": "^0.4.2"
+  }
+}
