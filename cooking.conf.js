@@ -2,7 +2,7 @@ var cooking = require('cooking');
 
 cooking.set({
   entry: {
-    'index': './src/popper.vue'
+    'index': './src/popper.js'
   },
   dist: './lib',
   template: false,
@@ -10,8 +10,7 @@ cooking.set({
   moduleName: 'VuePopper',
   // production
   clean: true,
-  extractCSS: 'style.css',
-  extends: ['vue']
+  extractCSS: 'style.css'
 });
 
 module.exports = cooking.resolve();

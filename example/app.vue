@@ -4,9 +4,20 @@
   <vue-popover :placement.sync="placement" :visible="popoverVisible">
     <div>这里是会弹出来的东西 🌚</div>
     <button @click="placement = 'left'">左</button>
+    <button @click="placement = 'left-start'">左上</button>
+    <button @click="placement = 'left-end'">左下</button>
+    <br>
     <button @click="placement = 'right'">右</button>
+    <button @click="placement = 'right-start'">右上</button>
+    <button @click="placement = 'right-end'">右下</button>
+    <br>
     <button @click="placement = 'top'">上</button>
+    <button @click="placement = 'top-start'">上左</button>
+    <button @click="placement = 'top-end'">上右</button>
+    <br>
     <button @click="placement = 'bottom'">下</button>
+    <button @click="placement = 'bottom-start'">下左</button>
+    <button @click="placement = 'bottom-end'">下右</button>
 
     <div slot="content">
       <button @click="popoverVisible = !popoverVisible">点击出现弹出框</button>

@@ -24,7 +24,7 @@ cooking.add('externals', {
 });
 
 cooking.add('resolve.alias', {
-  'vue-popper': path.join(__dirname, 'src/popper.vue')
+  'vue-popper': path.join(__dirname, 'src/popper.js')
 });
 
 module.exports = cooking.resolve();

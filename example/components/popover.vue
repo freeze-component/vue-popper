@@ -30,7 +30,7 @@ export default {
 
 <style scoped>
   .rel {
-    width: 100px;
+    width: 300px;
     margin: 0 auto;
     position: relative;
     text-align: center;

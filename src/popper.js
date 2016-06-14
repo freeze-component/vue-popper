@@ -1,4 +1,3 @@
-<script>
 import PopperJS from 'popper.js';
 
 /**
@@ -7,6 +6,7 @@ import PopperJS from 'popper.js';
  * @param {String} [placement=button] - Placement of the popper accepted values: top(-start, -end), right(-start, -end), bottom(-start, -right), left(-start, -end)
  * @param {Number} [offset=0] - Amount of pixels the popper will be shifted (can be negative).
  * @param {Boolean} [visible=false] Visibility of the popup element.
+ * @param {Boolean} [visible-arrow=false] Visibility of the arrow, no style.
  */
 export default {
   props: {
@@ -42,11 +42,8 @@ export default {
   methods: {
     createPopper() {
       if (this.cachePlacement === this.placement ||
-          ['top', 'top-start', 'top-end',
-          'bottom', 'bottom-start', 'bottom-end',
-          'left', 'left-start', 'left-end',
-          'right', 'right-start', 'right-end']
-          .indexOf(this.placement) === -1) {
+          !/^(top|bottom|left|right)(-start|-end)?$/g.test(this.placement)
+        ) {
         return;
       }
 
@@ -72,6 +69,7 @@ export default {
       for (let item in element.attributes) {
         if (/^_v-/.test(element.attributes[item].name)) {
           hash = element.attributes[item].name;
+          break;
         }
       }
 
@@ -109,4 +107,3 @@ export default {
     this.popperJS.destroy();
   }
 };
-</script>
