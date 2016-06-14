@@ -2,7 +2,7 @@ var cooking = require('cooking');
 
 cooking.set({
   entry: {
-    'index': './src/index.js'
+    'index': './src/popper.vue'
   },
   dist: './lib',
   template: false,
