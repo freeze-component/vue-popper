@@ -8,14 +8,14 @@ https://element-component.github.io/vue-popper/
 ```javascript
 import Popper from 'vue-popper'
 
-export defalut {
+export default {
   mixins: [Popper],
 
   props: {
+    content: String,
     visibleArrow: {
       default: true
-    },
-    content: String
+    }
   },
 
   template: `

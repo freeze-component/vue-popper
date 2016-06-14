@@ -2,20 +2,16 @@ var cooking = require('cooking');
 
 cooking.set({
   entry: {
-    'index': './src/popper.vue'
+    'index': './src/index.js'
   },
   dist: './lib',
   template: false,
-
+  format: 'umd',
+  moduleName: 'VuePopper',
   // production
   clean: true,
-  publicPath: '/vue-popper/',
   extractCSS: 'style.css',
   extends: ['vue']
-});
-
-cooking.add('externals', {
-  vue: 'Vue'
 });
 
 module.exports = cooking.resolve();

@@ -3,10 +3,20 @@
   "version": "0.0.0",
   "description": "A popper mixin for Vue.",
   "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "popper",
+    "vue",
+    "tooltip",
+    "popover"
+  ],
   "scripts": {
     "dev": "cooking watch -c cooking.demo.js",
     "dist": "cooking build -p",
-    "deploy": "cooking build -c cooking.demo.js -p && gh-pages -d example/dist"
+    "deploy": "cooking build -c cooking.demo.js -p && gh-pages -d example/dist",
+    "prepublish": "npm run dist"
   },
   "homepage": "https://element-component.github.io/vue-popper/",
   "repository": {
@@ -17,6 +27,7 @@
     "url": "https://github.com/element-component/vue-popper/issues"
   },
   "license": "MIT",
+  "author": "qingwei-li<cinwell.li@gmail.com>",
   "devDependencies": {
     "vue": "*",
     "gh-pages": "^0.11.0",
