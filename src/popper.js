@@ -14,13 +14,13 @@ export default {
       type: String,
       default: 'bottom'
     },
-    flipBehavior: {
-      default: 'flip'
+    boundariesPadding: {
+      type: Number,
+      default: 5
     },
     reference: Object,
     popper: Object,
     offset: {
-      type: Number,
       default: 0
     },
     visible: {
@@ -30,12 +30,18 @@ export default {
     visibleArrow: {
       type: Boolean,
       default: false
+    },
+    options: {
+      type: Object,
+      default() {
+        return {};
+      }
     }
   },
 
   watch: {
-    placement() {
-      this.createPopper();
+    ['reference && popper']() {
+      this.$nextTick(() => this.createPopper());
     }
   },
 
@@ -52,14 +58,13 @@ export default {
         this.popperJS.destroy();
       }
 
+      this.options.placement = this.placement;
+      this.options.offset = Number(this.offset);
+
       this.popperJS = new PopperJS(
         this.reference,
         this.popper,
-        {
-          placement: this.placement,
-          offset: this.offset,
-          flipBehavior: this.flipBehavior
-        }
+        this.options
       );
     },
 
@@ -88,19 +93,15 @@ export default {
     this.reference = this.reference || this.$els.reference;
     if (!this.reference) {
       console.error('[vue-popper] reference is required.');
-      return;
     }
     this.popper = this.popper || this.$els.popper;
     if (!this.popper) {
       console.error('[vue-popper] popper is required.');
-      return;
     }
 
     if (this.visibleArrow) {
       this.appendArrow(this.popper);
     }
-
-    this.createPopper();
   },
 
   beforeDestroy() {

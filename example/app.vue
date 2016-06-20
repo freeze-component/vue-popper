@@ -1,4 +1,17 @@
 <template>
+  <div class="box">
+    <div class="container">
+      <vue-popover :visible="popoverVisible3" placement="right">
+        <h1>test</h1>
+        <p>测试测试</p>
+
+        <div slot="content">
+          <button @click="popoverVisible3 = !popoverVisible3">点击出现弹出框</button>
+        </div>
+      </vue-popover>
+    </div>
+  </div>
+
   <h1 style="margin-bottom: 100px;">vue-popper: popover demo</h1>
 
   <vue-popover :placement.sync="placement" :visible="popoverVisible">
@@ -48,7 +61,8 @@
         placement: 'top',
         popoverVisible: false,
         tooltipVisible: false,
-        tooltipVisible2: false
+        tooltipVisible2: false,
+        popoverVisible3: false
       };
     }
   };
@@ -57,5 +71,16 @@
 <style>
   body {
     padding: 100px;
+  }
+
+  .box {
+    height: 200px;
+    width: 500px;
+    border: 1px solid;
+    overflow: auto;
+  }
+
+  .container {
+    height: 400px;
   }
 </style>

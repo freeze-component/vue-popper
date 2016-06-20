@@ -31,8 +31,6 @@ export default {
 <style scoped>
   .rel {
     width: 300px;
-    margin: 0 auto;
-    position: relative;
     text-align: center;
     padding: 20px;
     border-style: dotted;

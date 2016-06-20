@@ -40,7 +40,6 @@ export default {
 | offset             | Amount of pixels the popper will be shifted (can be negative).    | Number                       | 0          |
 | visible | Visibility of the popup element. | Boolean                       | false          |
 |visible-arrow | Visibility arrow, no style. | Boolean | false |
-| flip-behavior | The behavior used by the flip modifier to change the placement of the popper when the latter is trying to overlap its reference element. Defining flip as value, the placement will be flipped on its axis (right - left, top - bottom). You can even pass an array of placements (eg: ['right', 'left', 'top'] ) to manually specify how alter the placement when a flip is needed. (eg. in the above example, it would first flip from right to left, then, if even in its new placement, the popper is overlapping its reference element, it will be moved to top) | String, Array | 'flip' |
 
 ## Development
 
