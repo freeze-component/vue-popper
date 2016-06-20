@@ -40,7 +40,14 @@ export default {
   },
 
   watch: {
-    ['reference && popper']() {
+    'options': {
+      deep: true,
+      handler() {
+        this.$nextTick(() => this.createPopper());
+      }
+    },
+
+    'placement || offset'() {
       this.$nextTick(() => this.createPopper());
     }
   },
@@ -58,8 +65,8 @@ export default {
         this.popperJS.destroy();
       }
 
-      this.options.placement = this.placement;
-      this.options.offset = Number(this.offset);
+      this.$set('options.placement', this.placement);
+      this.$set('options.offset', this.offset);
 
       this.popperJS = new PopperJS(
         this.reference,
@@ -102,6 +109,8 @@ export default {
     if (this.visibleArrow) {
       this.appendArrow(this.popper);
     }
+
+    this.createPopper();
   },
 
   beforeDestroy() {
