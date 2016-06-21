@@ -23,14 +23,8 @@ export default {
     offset: {
       default: 0
     },
-    visible: {
-      type: Boolean,
-      default: false
-    },
-    visibleArrow: {
-      type: Boolean,
-      default: false
-    },
+    visible: Boolean,
+    visibleArrow: Boolean,
     options: {
       type: Object,
       default() {
@@ -40,15 +34,14 @@ export default {
   },
 
   watch: {
-    'options': {
-      deep: true,
-      handler() {
-        this.$nextTick(() => this.createPopper());
-      }
-    },
+    '(reference || $els.reference) && (popper || $els.popper)'() {
+      this.popper = this.popper || this.$els.popper;
+      this.reference = this.reference || this.$els.reference;
 
-    'placement || offset'() {
-      this.$nextTick(() => this.createPopper());
+      if (this.visibleArrow) {
+        this.appendArrow(this.popper);
+      }
+      this.createPopper();
     }
   },
 
@@ -77,6 +70,11 @@ export default {
 
     appendArrow(element) {
       let hash;
+      if (this.appended) {
+        return;
+      }
+
+      this.appended = true;
 
       for (let item in element.attributes) {
         if (/^_v-/.test(element.attributes[item].name)) {
@@ -94,23 +92,6 @@ export default {
       arrow.className = 'popper__arrow';
       element.appendChild(arrow);
     }
-  },
-
-  ready() {
-    this.reference = this.reference || this.$els.reference;
-    if (!this.reference) {
-      console.error('[vue-popper] reference is required.');
-    }
-    this.popper = this.popper || this.$els.popper;
-    if (!this.popper) {
-      console.error('[vue-popper] popper is required.');
-    }
-
-    if (this.visibleArrow) {
-      this.appendArrow(this.popper);
-    }
-
-    this.createPopper();
   },
 
   beforeDestroy() {
