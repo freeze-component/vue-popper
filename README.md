@@ -40,6 +40,7 @@ export default {
 | offset             | Amount of pixels the popper will be shifted (can be negative).    | Number                       | 0          |
 | visible | Visibility of the popup element. | Boolean                       | false          |
 |visible-arrow | Visibility arrow, no style. | Boolean | false |
+| autoCreate | auto init popper | Boolean | true|
 
 ## Methods
 - createPopper

@@ -25,6 +25,10 @@ export default {
     },
     visible: Boolean,
     visibleArrow: Boolean,
+    autoCreate: {
+      type: Boolean,
+      default: true
+    },
     options: {
       type: Object,
       default() {
@@ -100,7 +104,9 @@ export default {
   },
 
   ready() {
-    this.createPopper();
+    if (this.autoCreate) {
+      this.createPopper();
+    }
   },
 
   beforeDestroy() {
