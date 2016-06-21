@@ -35,12 +35,6 @@ export default {
 
   watch: {
     '(reference || $els.reference) && (popper || $els.popper)'() {
-      this.popper = this.popper || this.$els.popper;
-      this.reference = this.reference || this.$els.reference;
-
-      if (this.visibleArrow) {
-        this.appendArrow(this.popper);
-      }
       this.createPopper();
     }
   },
@@ -51,6 +45,17 @@ export default {
           !/^(top|bottom|left|right)(-start|-end)?$/g.test(this.placement)
         ) {
         return;
+      }
+
+      this.popper = this.popper || this.$els.popper;
+      this.reference = this.reference || this.$els.reference;
+
+      if (!this.popper || !this.reference) {
+        return;
+      }
+
+      if (this.visibleArrow) {
+        this.appendArrow(this.popper);
       }
 
       this.cachePlacement = this.placement;
@@ -92,6 +97,10 @@ export default {
       arrow.className = 'popper__arrow';
       element.appendChild(arrow);
     }
+  },
+
+  ready() {
+    this.createPopper();
   },
 
   beforeDestroy() {

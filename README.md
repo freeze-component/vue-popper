@@ -41,6 +41,9 @@ export default {
 | visible | Visibility of the popup element. | Boolean                       | false          |
 |visible-arrow | Visibility arrow, no style. | Boolean | false |
 
+## Methods
+- createPopper
+
 ## Development
 
 ```shell
