@@ -106,6 +106,8 @@ export default {
   },
 
   beforeDestroy() {
-    this.popperJS.destroy();
+    if (this.popperJS) {
+      this.popperJS.destroy();
+    }
   }
 };
