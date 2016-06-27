@@ -38,8 +38,10 @@ export default {
   },
 
   watch: {
-    '(reference || $els.reference) && (popper || $els.popper)'() {
-      this.createPopper();
+    'visible'() {
+      if (!this.popperJS && this.autoCreate) {
+        this.createPopper();
+      }
     }
   },
 
@@ -100,12 +102,6 @@ export default {
       arrow.setAttribute('x-arrow', '');
       arrow.className = 'popper__arrow';
       element.appendChild(arrow);
-    }
-  },
-
-  ready() {
-    if (this.autoCreate) {
-      this.createPopper();
     }
   },
 
