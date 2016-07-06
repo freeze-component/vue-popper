@@ -25,10 +25,7 @@ export default {
     },
     visible: Boolean,
     visibleArrow: Boolean,
-    autoCreate: {
-      type: Boolean,
-      default: true
-    },
+    transition: String,
     options: {
       type: Object,
       default() {
@@ -38,18 +35,18 @@ export default {
   },
 
   watch: {
-    'visible'() {
-      if (!this.popperJS && this.autoCreate) {
-        this.createPopper();
+    'visible'(val) {
+      if (val) {
+        this.updatePopper();
+      } else {
+        this.destroyPopper();
       }
     }
   },
 
   methods: {
     createPopper() {
-      if (this.cachePlacement === this.placement ||
-          !/^(top|bottom|left|right)(-start|-end)?$/g.test(this.placement)
-        ) {
+      if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.placement)) {
         return;
       }
 
@@ -64,7 +61,6 @@ export default {
         this.appendArrow(this.popper);
       }
 
-      this.cachePlacement = this.placement;
       if (this.popperJS && this.popperJS.hasOwnProperty('destroy')) {
         this.popperJS.destroy();
       }
@@ -77,6 +73,41 @@ export default {
         this.popper,
         this.options
       );
+      this.popperJS.onCreate(popper => {
+        this.resetTransformOrigin(popper);
+      });
+    },
+
+    updatePopper() {
+      if (this.popperJS) {
+        this.popperJS.update();
+      } else {
+        this.createPopper();
+      }
+    },
+
+    doDestroy() {
+      this.popperJS._popper.removeEventListener('transitionend', this.doDestroy);
+      this.popperJS.destroy();
+      this.popperJS = null;
+    },
+
+    destroyPopper() {
+      if (this.popperJS) {
+        this.resetTransformOrigin(this.popperJS);
+        if (this.transition) {
+          this.popperJS._popper.addEventListener('transitionend', this.doDestroy);
+        } else {
+          this.doDestroy();
+        }
+      }
+    },
+
+    resetTransformOrigin(popper) {
+      let placementMap = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' };
+      let placement = popper._popper.getAttribute('x-placement').split('-')[0];
+      let origin = placementMap[placement];
+      popper._popper.style.transformOrigin = ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
     },
 
     appendArrow(element) {
