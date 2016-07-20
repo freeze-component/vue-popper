@@ -1,11 +1,11 @@
 <template>
   <span>
-    <div class="popper" v-el:popper v-show="visible">
+    <span class="popper" v-el:popper v-show="visible">
       <span v-text="content"></span>
-    </div>
-    <div class="rel" v-el:reference>
+    </span>
+    <span class="rel" v-el:reference>
       <slot></slot>
-    </div>
+    </span>
   </span>
 </template>
 

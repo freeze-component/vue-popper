@@ -75,6 +75,7 @@ export default {
       );
       this.popperJS.onCreate(popper => {
         this.resetTransformOrigin(popper);
+        this.$emit('created', this);
       });
     },
 

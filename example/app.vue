@@ -43,7 +43,7 @@
     <button @click="tooltipVisible = !tooltipVisible">点击出现文字提示</button>
   </vue-tooltip>
 
-  <vue-tooltip content="bottom" :visible="tooltipVisible2">
+  <vue-tooltip content="bottom" :visible="tooltipVisible2" @created="handleCreated">
     <button @click="tooltipVisible2 = !tooltipVisible2">点击出现文字提示 bottom</button>
   </vue-tooltip>
 
@@ -64,6 +64,11 @@
         tooltipVisible2: false,
         popoverVisible3: false
       };
+    },
+    methods: {
+      handleCreated(vm) {
+        console.log(vm);
+      }
     }
   };
 </script>
